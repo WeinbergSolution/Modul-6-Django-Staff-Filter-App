@@ -1,27 +1,102 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Staff Filter App</title>
+    <meta charset="UTF-8" />
   </head>
   <body>
     <h1>Staff Filter App</h1>
 
     <h2>Aufgaben:</h2>
     <ol>
-      <li>Zeige hier im Template eine Liste aller Mitarbeiter, ihrer Abteilung und ihres Gehalts an.</li>
-      <li>Zeige eine Liste der Namen aller Mitarbeiter, die mehr als 3000 € im Monat verdienen.</li>
-      <li>Wie hoch ist die Anzahl der Mitarbeiter, die 5000 € im Monat oder mehr verdienen?</li>
+      <li>
+        Zeige hier im Template eine Liste aller Mitarbeiter, ihrer Abteilung und
+        ihres Gehalts an.
+      </li>
+      <li>
+        Zeige eine Liste der Namen aller Mitarbeiter, die mehr als 3000 € im
+        Monat verdienen.
+      </li>
+      <li>
+        Wie hoch ist die Anzahl der Mitarbeiter, die 5000 € im Monat oder mehr
+        verdienen?
+      </li>
     </ol>
     <h3>Zusatzaufgaben:</h3>
     <ol start="4">
-      <li>Wie hoch ist das Durchschnittsgehalt aller Mitarbeiter im Sales-Team? Zeige das Ergebnis auf zwei Nachkommastellen gerundet an.</li>
-      <li>Welche Mitarbeiter wurden vor dem 1. Januar 2022 eingestellt und gehören NICHT zur Abteilung HR?</li>
+      <li>
+        Wie hoch ist das Durchschnittsgehalt aller Mitarbeiter im Sales-Team?
+        Zeige das Ergebnis auf zwei Nachkommastellen gerundet an.
+      </li>
+      <li>
+        Welche Mitarbeiter wurden vor dem 1. Januar 2022 eingestellt und gehören
+        NICHT zur Abteilung HR?
+      </li>
     </ol>
 
-    <h2 style="color:red">Antworten:</h2>
+    <h2 style="color: red">Antworten:</h2>
 
-    <!-- Hier eure Antworten rendern -->
+    <!-- 1. Zeige hier im Template eine Liste aller Mitarbeiter, ihrer Abteilung und ihres Gehalts an. -->
+
+    <h3>Aufgabe 1</h3>
+    <p>
+      Zeige hier im Template eine Liste aller Mitarbeiter, ihrer Abteilung und
+      ihres Gehalts an.
+    </p>
+    {% for employee in employees %}
+    <ul>
+      <li>{{ employee.name }}</li>
+      <li>{{ employee.department }}</li>
+      <li>{{ employee.salary }}</li>
+    </ul>
+    {% empty %}
+    <li>No employee yet.</li>
+    {% endfor %}
+
+    <!-- 2. Zeige eine Liste der Namen aller Mitarbeiter, die mehr als 3000 € im Monat verdienen.. -->
+
+    <h3>Aufgabe 2</h3>
+    <p>
+      Zeige eine Liste der Namen aller Mitarbeiter, die mehr als 3000 € im Monat
+      verdienen.
+    </p>
+    {% for employee in employees_over_3000 %}
+    <ul>
+      <li>{{ employee.name }}</li>
+    </ul>
+    {% empty %}
+    <li>No employee with balance over 3000.</li>
+    {% endfor %}
+
+    <!-- 3 Anzahl der Mitarbeiter mit mindestens 5000 € Gehalt ermitteln. -->
+
+    <h3>Aufgabe 3</h3>
+    <p>Anzahl der Mitarbeiter mit mindestens 5000 € Gehalt ermitteln.</p>
+    {% for employee in employees_at_least_5000 %}
+    <ul>
+      <li>{{ employee.name }}</li>
+    </ul>
+    {% empty %}
+    <li>No employee with balance at least 5000.</li>
+    {% endfor %}
+
+    <!-- 4 Durchschnittsgehalt des Sales-Teams berechnen. -->
+
+    <h3>Zusatz Aufgabe 4</h3>
+    <p>Durchschnittsgehalt des Sales-Teams berechnen</p>
+    <li>Durchschnittsgehalt Sales: {{ sales_average|floatformat:2 }} €</li>
+
+    <!-- 5 Mitarbeiter vor dem 01.01.2022 ohne HR-Abteilung ermitteln. -->
+
+    <h3>Zusatz Aufgabe 5</h3>
+    {% for employee in employees_no_hr %}
+    <ul>
+      <li>{{ employee.name }}</li>
+    </ul>
+    {% empty %}
+    <li>No employee Found before 01.01.2022</li>
+    {% endfor %}
   </body>
 </html>
